@@ -74,6 +74,11 @@ module Vagrant
 
         vm.ssh.upload!(StringIO.new(json), File.join(config.provisioning_path, "dna.json"))
       end
+
+      def colour_output(type, data)
+        data = "\e[1;31m#{data.chomp}\e[0m" if type == :stderr
+        data
+      end
     end
 
     class Chef < Base
